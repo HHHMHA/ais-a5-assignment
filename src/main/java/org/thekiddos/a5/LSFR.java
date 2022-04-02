@@ -2,7 +2,7 @@ package org.thekiddos.a5;
 
 import java.util.BitSet;
 
-public class LSFR implements BaseLSFR {
+public class LSFR implements BaseLFSR {
     private BitSet register;
     private final int length;
     private final int clockBitIndex;

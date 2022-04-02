@@ -7,7 +7,7 @@ import java.util.BitSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 // Basic tests for sanity check
-class LSFRTest {
+class LFSRTest {
     // Represents 0100 1110 0010 1111 0100 1101 0111 1100 0001 1110 1011 1000 1000 1011 0011 1010
     // But we start reverse way because bitset starts from most right (1010)
     byte[] sessionKeyBytes = { 58, (byte) 139, (byte) 184, 30, 62, 77, 47, 78 };
@@ -32,9 +32,9 @@ class LSFRTest {
         expected.set( 16 );
         expected.set( 18 );
 
-        LSFR lsfr1 = new LSFR( 19, 8, new int[]{ 13, 16, 17, 18 } );
-        lsfr1.initialize( sessionKey, frameCounter );
-        assertEquals( expected.toString(), lsfr1.toString() );
+        LSFR lfsr0 = new LSFR( 19, 8, new int[]{ 13, 16, 17, 18 } );
+        lfsr0.initialize( sessionKey, frameCounter );
+        assertEquals( expected.toString(), lfsr0.toString() );
     }
 
     @Test
@@ -42,8 +42,8 @@ class LSFRTest {
         BitSet sessionKey = BitSet.valueOf( sessionKeyBytes );
         BitSet frameCounter = BitSet.valueOf( frameCounterBytes );
 
-        LSFR lsfr1 = new LSFR( 19, 8, new int[]{ 13, 16, 17, 18 } );
-        lsfr1.initialize( sessionKey, frameCounter );
+        LSFR lfsr0 = new LSFR( 19, 8, new int[]{ 13, 16, 17, 18 } );
+        lfsr0.initialize( sessionKey, frameCounter );
 
         BitSet expected = new BitSet( 19 );
         expected.set( 0 );
@@ -57,8 +57,8 @@ class LSFRTest {
         expected.set( 15 );
         expected.set( 17 );
 
-        lsfr1.clock();
-        assertEquals( expected.toString(), lsfr1.toString() );
+        lfsr0.clock();
+        assertEquals( expected.toString(), lfsr0.toString() );
     }
 
     @Test
@@ -66,12 +66,12 @@ class LSFRTest {
         BitSet sessionKey = BitSet.valueOf( sessionKeyBytes );
         BitSet frameCounter = BitSet.valueOf( frameCounterBytes );
 
-        LSFR lsfr1 = new LSFR( 19, 8, new int[]{ 13, 16, 17, 18 } );
+        LSFR lfsr0 = new LSFR( 19, 8, new int[]{ 13, 16, 17, 18 } );
 
-        assertFalse( lsfr1.getClockBit() );
+        assertFalse( lfsr0.getClockBit() );
 
-        lsfr1.initialize( sessionKey, frameCounter );
+        lfsr0.initialize( sessionKey, frameCounter );
 
-        assertTrue( lsfr1.getClockBit() );
+        assertTrue( lfsr0.getClockBit() );
     }
 }

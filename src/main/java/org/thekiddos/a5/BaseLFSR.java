@@ -2,7 +2,7 @@ package org.thekiddos.a5;
 
 import java.util.BitSet;
 
-public interface BaseLSFR {
+public interface BaseLFSR {
     void initialize(BitSet sessionKey, BitSet frameCounter);
     boolean clock();
     // TODO: make dynamic
