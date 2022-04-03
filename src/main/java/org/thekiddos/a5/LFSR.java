@@ -2,13 +2,13 @@ package org.thekiddos.a5;
 
 import java.util.BitSet;
 
-public class LSFR implements BaseLFSR {
+public class LFSR implements BaseLFSR {
     private BitSet register;
     private final int length;
     private final int clockBitIndex;
     private final int[] tappingBitsIndices;
 
-    public LSFR( int length, int clockBitIndex, int[] tappingBitsIndices ) {
+    public LFSR( int length, int clockBitIndex, int[] tappingBitsIndices ) {
         this.length = length;
         this.clockBitIndex = clockBitIndex;
         this.tappingBitsIndices = tappingBitsIndices;
@@ -23,7 +23,7 @@ public class LSFR implements BaseLFSR {
     }
 
     private void clock( BitSet key, int keyLength ) {
-        // We start from reverse because LSFR 0 index is the left most bit
+        // We start from reverse because LFSR 0 index is the left most bit
         // while key 0 index is right most bit, so we reverse it
         for ( int i = keyLength - 1; i >= 0; --i ) {
             var newBit = key.get( i ) ^ xorTappingBits();
@@ -42,6 +42,10 @@ public class LSFR implements BaseLFSR {
 
     public boolean get( int bitIndex ) {
         return register.get( bitIndex );
+    }
+
+    public boolean getLastBit() {
+        return register.get( length - 1 );
     }
 
     private boolean xorTappingBits() {
