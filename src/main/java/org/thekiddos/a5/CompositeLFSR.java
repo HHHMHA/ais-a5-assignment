@@ -3,7 +3,7 @@ package org.thekiddos.a5;
 import java.util.*;
 
 public abstract class CompositeLFSR implements BaseLFSR {
-    private final List<LFSR> registers = new ArrayList<>();
+    protected final List<LFSR> registers = new ArrayList<>();
 
     /**
      * Implements irregular clocking using the clock bit for each register
