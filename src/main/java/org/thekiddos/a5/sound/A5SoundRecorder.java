@@ -5,10 +5,8 @@ import org.thekiddos.a5.A5Cipher;
 import javax.sound.sampled.TargetDataLine;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
-import java.util.List;
 
 public class A5SoundRecorder extends SoundRecorder {
     private BitSet sessionKey = BitSet.valueOf( new byte[]{ 58, (byte) 139, (byte) 184, 30, 62, 77, 47, 78 } );
@@ -36,12 +34,12 @@ public class A5SoundRecorder extends SoundRecorder {
         var paddedData = Arrays.copyOf( data, paddedBytesSize );
 
         for ( int i = 0; i < paddedData.length; i += STREAM_ENCRYPTION_SIZE_BYTES ) {
-            var currentBytes = Arrays.copyOfRange( paddedData, i, i + STREAM_ENCRYPTION_SIZE_BITS );
+            var currentBytes = Arrays.copyOfRange( paddedData, i, i + STREAM_ENCRYPTION_SIZE_BYTES );
             var currentBits = BitSet.valueOf( currentBytes );
             var encryptedBits = a5.encrypt( currentBits );
             var currentEncryptedBytes= encryptedBits.toByteArray();
 
-            out.write( currentEncryptedBytes, 0, STREAM_ENCRYPTION_SIZE_BYTES );
+            out.write( currentEncryptedBytes, 0, currentEncryptedBytes.length );
         }
     }
 }
