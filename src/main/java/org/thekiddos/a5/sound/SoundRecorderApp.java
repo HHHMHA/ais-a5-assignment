@@ -9,6 +9,7 @@ class SoundRecorderApp {
         AudioFormat format = buildAudioFormatInstance();
 
         SoundRecorder soundRecorder = new SoundRecorder();
+//        SoundRecorder soundRecorder = new A5SoundRecorder();
         soundRecorder.build(format);
 
         System.out.println("Start recording ....");
