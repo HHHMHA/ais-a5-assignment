@@ -37,7 +37,7 @@ public class A5SoundRecorder extends SoundRecorder {
             var currentBytes = Arrays.copyOfRange( paddedData, i, i + STREAM_ENCRYPTION_SIZE_BYTES );
             var currentBits = BitSet.valueOf( currentBytes );
             var encryptedBits = a5.encrypt( currentBits );
-            var currentEncryptedBytes= encryptedBits.toByteArray();
+            var currentEncryptedBytes= Arrays.copyOf( encryptedBits.toByteArray(), STREAM_ENCRYPTION_SIZE_BYTES );
 
             out.write( currentEncryptedBytes, 0, currentEncryptedBytes.length );
         }
