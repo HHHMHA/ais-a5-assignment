@@ -22,4 +22,8 @@ public class A5Cipher {
         return result;
     }
 
+    public void resetCounter() {
+        keyStreamGenerator.reInitialize();
+    }
+
 }

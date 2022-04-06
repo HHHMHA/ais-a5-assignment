@@ -17,7 +17,7 @@ public class Controller {
         soundRecorder.build( format );
     }
 
-    public void toggleRecording( ActionEvent actionEvent ) {
+    public void toggleRecording( ActionEvent actionEvent ) throws InterruptedException {
         if ( !isRecording ) {
             soundRecorder.start();
             isRecording = true;
@@ -25,9 +25,14 @@ public class Controller {
         }
 
         soundRecorder.stop();
+        Thread.sleep( 3000 );
         WaveDataUtil wd = new WaveDataUtil();
         wd.saveToFile( "SoundClip", AudioFileFormat.Type.WAVE, soundRecorder.getAudioInputStream() );
         isRecording = false;
+
+        soundRecorder.decryptLastRecording();
+        wd = new WaveDataUtil();
+        wd.saveToFile("SoundClipD", AudioFileFormat.Type.WAVE, soundRecorder.getAudioInputStream());
     }
 
     public static AudioFormat buildAudioFormatInstance() {

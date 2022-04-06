@@ -4,6 +4,10 @@ package org.thekiddos.a5;
 //package com.java2s;
 //License from project: Open Source License
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.BitSet;
 
 public class Utils {
@@ -17,5 +21,28 @@ public class Utils {
         }
         bits.set( i, true );
         return true;
+    }
+
+    // source: https://stackoverflow.com/a/6934403
+    public static byte[] readAudioFileData(final String filePath) {
+        byte[] data = null;
+        try {
+            final ByteArrayOutputStream baout = new ByteArrayOutputStream();
+            final File file = new File(filePath);
+            final AudioInputStream audioInputStream = AudioSystem
+                    .getAudioInputStream(file);
+
+            byte[] buffer = new byte[4096];
+            int c;
+            while ((c = audioInputStream.read(buffer, 0, buffer.length)) != -1) {
+                baout.write(buffer, 0, c);
+            }
+            audioInputStream.close();
+            baout.close();
+            data = baout.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }

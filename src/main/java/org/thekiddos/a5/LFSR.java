@@ -3,7 +3,7 @@ package org.thekiddos.a5;
 import java.util.BitSet;
 
 public class LFSR implements BaseLFSR {
-    private BitSet register;
+    private final BitSet register;
     private final int length;
     private final int clockBitIndex;
     private final int[] tappingBitsIndices;

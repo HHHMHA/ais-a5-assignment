@@ -75,7 +75,7 @@ public class SoundRecorder implements Runnable {
         }
     }
 
-    private void setAudioInputStream(AudioInputStream aStream) {
+    public void setAudioInputStream(AudioInputStream aStream) {
         this.audioInputStream = aStream;
     }
 

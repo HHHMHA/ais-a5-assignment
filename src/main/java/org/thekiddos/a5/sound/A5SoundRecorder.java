@@ -1,7 +1,6 @@
 package org.thekiddos.a5.sound;
 
 import org.thekiddos.a5.A5Cipher;
-
 import javax.sound.sampled.TargetDataLine;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -40,6 +39,23 @@ public class A5SoundRecorder extends SoundRecorder {
             var currentEncryptedBytes= Arrays.copyOf( encryptedBits.toByteArray(), STREAM_ENCRYPTION_SIZE_BYTES );
 
             out.write( currentEncryptedBytes, 0, currentEncryptedBytes.length );
+        }
+    }
+
+    public void decryptLastRecording() {
+        byte[] data = this.getByteAudio();
+        a5.resetCounter();
+
+        try ( final ByteArrayOutputStream out = new ByteArrayOutputStream() ) {
+            var format = getFormat();
+            int frameSizeInBytes = format.getFrameSize();
+            encryptBytes( out, data, data.length );
+            setAudioInputStream( convertToAudioIStream( out, frameSizeInBytes ) );
+        } catch ( IOException ex ) {
+            ex.printStackTrace();
+        } catch ( Exception ex ) {
+            ex.printStackTrace();
+            return;
         }
     }
 }

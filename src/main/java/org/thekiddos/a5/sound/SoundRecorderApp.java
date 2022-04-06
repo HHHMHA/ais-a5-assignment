@@ -9,7 +9,7 @@ class SoundRecorderApp {
         AudioFormat format = buildAudioFormatInstance();
 
 //        SoundRecorder soundRecorder = new SoundRecorder();
-        SoundRecorder soundRecorder = new A5SoundRecorder();
+        A5SoundRecorder soundRecorder = new A5SoundRecorder();
         soundRecorder.build(format);
 
         System.out.println("Start recording ....");
@@ -20,6 +20,12 @@ class SoundRecorderApp {
         WaveDataUtil wd = new WaveDataUtil();
         Thread.sleep(3000);
         wd.saveToFile("SoundClip", AudioFileFormat.Type.WAVE, soundRecorder.getAudioInputStream());
+
+        System.out.println("Decrypting...");
+        soundRecorder.decryptLastRecording();
+        wd = new WaveDataUtil();
+        Thread.sleep(3000);
+        wd.saveToFile("SoundClipD", AudioFileFormat.Type.WAVE, soundRecorder.getAudioInputStream());
     }
 
     public static AudioFormat buildAudioFormatInstance() {

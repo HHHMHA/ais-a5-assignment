@@ -4,6 +4,7 @@ import java.util.BitSet;
 
 // TODO: raise exceptions for improper use
 public class A5KeyStreamGenerator extends CompositeLFSR {
+    private BitSet initialFrameCounter;
     private BitSet frameCounter;
     private BitSet sessionKey;
     private static final int INITIAL_CLOCKING_CYCLES = 100;
@@ -12,7 +13,8 @@ public class A5KeyStreamGenerator extends CompositeLFSR {
     @Override
     public void initialize( BitSet sessionKey, BitSet frameCounter ) {
         this.sessionKey = sessionKey;
-        this.frameCounter = frameCounter;
+        this.frameCounter = (BitSet) frameCounter.clone();
+        this.initialFrameCounter = (BitSet) frameCounter.clone();
         registers.clear();
         LFSR lfsr1 = new LFSR( 19, 8, new int[]{ 13, 16, 17, 18 } );
         LFSR lfsr2 = new LFSR( 22, 10, new int[]{ 20, 21 } );
@@ -21,6 +23,10 @@ public class A5KeyStreamGenerator extends CompositeLFSR {
         registers.add( lfsr2 );
         registers.add( lfsr3 );
         registers.forEach( lfsr -> lfsr.initialize( sessionKey, frameCounter ) );
+    }
+
+    public void reInitialize() {
+        this.initialize( sessionKey, initialFrameCounter );
     }
 
     public BitSet getNextKeyStream() {
