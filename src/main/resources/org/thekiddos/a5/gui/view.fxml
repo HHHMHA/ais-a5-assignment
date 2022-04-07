@@ -3,11 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
+<?import com.jfoenix.controls.JFXToggleButton?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.thekiddos.a5.gui.Controller">
    <children>
-      <ToggleButton layoutX="273.0" layoutY="181.0" mnemonicParsing="false" onAction="#toggleRecording" text="Record">
-      </ToggleButton>
+      <JFXToggleButton layoutX="273.0" layoutY="181.0" mnemonicParsing="false" onAction="#toggleRecording" text="Record">
+      </JFXToggleButton>
       <Label layoutX="273.0" layoutY="124.0" text="Session Key" />
       <Label contentDisplay="CENTER" layoutX="48.0" layoutY="147.0" prefHeight="17.0" prefWidth="485.0" text="  0100 1110 0010 1111 0100 1101 0111 1100 0001 1110 1011 1000 1000 1011 0011 1010" textAlignment="CENTER" />
    </children>
