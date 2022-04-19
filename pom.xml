@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.thekiddos</groupId>
-    <artifactId>ais-a5</artifactId>
+    <artifactId>ais-a5-assignment</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>A5/1 Cipher Encryption</name>
@@ -31,7 +31,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
