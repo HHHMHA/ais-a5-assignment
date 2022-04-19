@@ -35,7 +35,7 @@ public class A5KeyStreamGenerator extends CompositeLFSR {
 
         BitSet result = new BitSet( KEY_STREAM_LENGTH );
         for ( int cycle = 1; cycle <= KEY_STREAM_LENGTH; ++cycle ) {
-            boolean outputBit = registers.stream().map( LFSR::clock ).reduce( false, ( first, second ) -> first ^ second );
+            boolean outputBit = this.clock();
             result.set( cycle - 1, outputBit );
         }
 
